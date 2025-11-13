@@ -338,25 +338,6 @@ function App() {
     })
   }
 
-  const downloadHtml = () => {
-    const blob = new Blob([resumeHtml], { type: 'text/html;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${data.name || 'resume'}.html`
-    a.click()
-    URL.revokeObjectURL(url)
-  }
-
-  const copyHtml = async () => {
-    try {
-      await navigator.clipboard.writeText(resumeHtml)
-      alert('Resume HTML copied to clipboard')
-    } catch {
-      alert('Copy failed. Try the Download option instead.')
-    }
-  }
-
   const printResume = () => {
     const iframe = iframeRef.current
     if (!iframe) return
@@ -422,12 +403,6 @@ function App() {
               </div>
 
               <div className="flex flex-wrap gap-3 pt-2">
-                <button onClick={copyHtml} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50">
-                  Copy HTML
-                </button>
-                <button onClick={downloadHtml} className="inline-flex items-center gap-2 rounded-lg border border-transparent bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-700">
-                  Download HTML
-                </button>
                 <button onClick={printResume} className="inline-flex items-center gap-2 rounded-lg border border-transparent bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200">
                   Print
                 </button>
